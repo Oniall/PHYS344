@@ -48,7 +48,7 @@ p=random.randint(0,1)
 # 0 represents -1/2 spin
 
 
-while i<N:
+while i < N:
     i = i + 100
     p = random.randint(0,1)
     p_list.append(p)
