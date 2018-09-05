@@ -1,1 +1,23 @@
+from __future__ import division
+from numpy import *
+from scipy import *
+from math import *
+from pylab import *
+import matplotlib.pyplot as plt
+import random
 
+t = 0
+x_list = []
+y_list = []
+
+while t < 10:
+    t = t + 1
+    x = random.random()
+    y = random.random()
+    x_list.append(x)
+    y_list.append(y)
+print(x_list)
+
+figure()
+plt.scatter(x_list, y_list)
+show()
