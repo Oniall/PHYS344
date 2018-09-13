@@ -1,0 +1,73 @@
+from __future__ import division
+from numpy import *
+from scipy import *
+from math import *
+from pylab import *
+import matplotlib.pyplot as plt
+import random
+
+#HW02 Random Walk
+
+# constants
+d = 1  # distance of one step
+N = 20  # total number of steps
+steps = [0] * N  # generate a vector
+
+
+# function of one dimensional random walk
+def Walk(n):  # n the number of times the person did random walks
+    j = 0
+    Pos_list = []
+    while j <= n:
+        Pos = 0  # initially the person is at x = 0
+        for i in range(N):
+            x = randint(0, 2)
+            if x == 0:
+                x = x - 1
+            steps[i] = x
+            Pos = Pos + d * steps[i]
+        Pos_list.append(Pos)
+        j = j + 1
+    return Pos_list
+
+#List of walk final positions
+W = Walk(5000)  # for n random walks
+
+# Counting the number of times x distance occurs
+x = linspace(-N, N, 21)
+x_count = []
+for i in range(N + 1):
+    c = W.count(2 * i - 20)
+    x_count.append(c)
+
+#Plotting x vs x_count
+figure()
+plot(x, x_count)
+xlabel('Distance Walked (x)')
+ylabel('How many times x distance occured')
+title('Probability Distribution of a Random 20 Steps Walk')
+show()
+
+#Finding x^2
+n = int(N / 2 + 1)
+x2 = [0] * n
+for i in range(n):
+    x2[i] = (2 * i) ** 2
+
+# Counting the number of times x^2 distance occurs
+x2_count = []
+for i in range(N + 1):
+    W[i] = W[i] ** 2
+for j in range(n):
+    c = W.count((2 * j) ** 2)
+    x2_count.append(c)
+print(x2)
+print(x2_count)
+
+#Plotting x^2 vs x^2_count
+figure()
+plt.scatter(x2, x2_count)
+xlabel('Squared of Distance Walked (x^2)')
+ylabel('How many times x^2 occured')
+title('Probability Distribution of x^2 of Random 20 Steps')
+show()
